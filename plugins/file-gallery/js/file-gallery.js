@@ -10,6 +10,10 @@ jQuery(document).ready(function($)
 {
 	"use strict";
 
+	if( ! wp || ! wp.media ) {
+		return;
+	}
+
 	$.extend(file_gallery,
 	{
 		tmp : [],
@@ -27,6 +31,12 @@ jQuery(document).ready(function($)
 			}
 
 			return null;
+		},
+
+		tinymce_is_active: function ()
+		{
+			var editor = file_gallery.tinymce_get_editor();
+			return editor && ! editor.isHidden()
 		},
 
 		/**
@@ -1725,39 +1735,42 @@ jQuery(document).ready(function($)
 	 * uploader
 	 * thanks to http://stackoverflow.com/questions/7110353/html5-dragleave-fired-when-hovering-a-child-element
 	 */
-		$("#file_gallery").on(
+		$("#fg_container").on(
 		{
-			dragenter: function(e)
+			dragenter: function (event)
 			{
-				if( ! file_gallery.uploader_dragdrop ) {
-					return;
-				}
-				
-				if( file_gallery.upload_inside === false )
+				if( file_gallery.uploader_dragdrop && ! file_gallery.upload_inside )
 				{
 					file_gallery.upload_inside = true;
 					$("#file_gallery").addClass("uploader");
 				}
+
+				event.stopPropagation();
+				event.preventDefault();
+				return false;
 			},
-			
-			dragleave: function(e)
+
+			dragleave: function (event)
 			{
-				if( ! file_gallery.uploader_dragdrop ) {
-					return;
-				}
-				
-				var related = e.target,
-					inside = false;
-				
-				if( related && related !== this && $.contains(this, related) ) {
-					inside = true;
-				}
-				else if( file_gallery.upload_inside === true )
+				var target = event.target;
+				var container = document.getElementById("file_gallery");
+
+				if( file_gallery.uploader_dragdrop )
 				{
-					file_gallery.upload_inside = false;
-					$("#file_gallery").removeClass("uploader");
+					// http://stackoverflow.com/questions/7110353/
+					if( target !== container && jQuery.contains(container, target) ) {
+						// still inside container
+					} else if( file_gallery.upload_inside )
+					{
+						file_gallery.upload_inside = false;
+						$("#file_gallery").removeClass("uploader");
+					}
 				}
-			}
+
+				event.stopPropagation();
+				event.preventDefault();
+				return false;
+			},
 		});
 		
 		file_gallery.upload_handle_error = function(error, uploader)
@@ -2130,7 +2143,7 @@ jQuery(document).ready(function($)
 			file_gallery.tinymce_deselect( true );
 			file_gallery.init();
 		});
-
+		
 		jQuery("body").on("tb_unload", "#TB_window", function()
 		{
 			file_gallery.tinymce_deselect( true );

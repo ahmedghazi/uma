@@ -14,7 +14,7 @@ tinymce.PluginManager.add('importcss', function(editor) {
 	var self = this, each = tinymce.each;
 
 	function compileFilter(filter) {
-		if (typeof(filter) == "string") {
+		if (typeof filter == "string") {
 			return function(value) {
 				return value.indexOf(filter) !== -1;
 			};
@@ -44,7 +44,7 @@ tinymce.PluginManager.add('importcss', function(editor) {
 			try {
 				rules = styleSheet.cssRules || styleSheet.rules;
 			} catch (e) {
-				// Firefox fails on rules to remote domain for example: 
+				// Firefox fails on rules to remote domain for example:
 				// @import url(//fonts.googleapis.com/css?family=Pathway+Gothic+One);
 			}
 
