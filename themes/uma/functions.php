@@ -67,7 +67,7 @@ function html5blank_nav()
 {
     wp_nav_menu(
     array(
-        'theme_location'  => 'header-menu',
+        'theme_location'  => 'primary',
         'menu'            => '',
         'container'       => 'div',
         'container_class' => 'menu-{menu slug}-container',
@@ -81,7 +81,7 @@ function html5blank_nav()
         'link_before'     => '',
         'link_after'      => '',
         'items_wrap'      => '<ul>%3$s</ul>',
-        'depth'           => 0,
+        'depth'           => 1,
         'walker'          => ''
         )
     );
