@@ -1,28 +1,12 @@
 <?php /* Template Name: INGRÉDIENTS */ get_header(); ?>
-
-	<section>
-
-		<input type="hidden" id="bdc" value="<?php body_class(); ?>">
-
+<div class="main">
+	
 		<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<?php
-				$img = wp_get_attachment_image_src( get_post_thumbnail_id(), "full");
-				//$css = 'style="background-image:url('.$bg[0].');"';
-				?>
-				<div class="banner">
-					<div class="banner_img">
-						<img src="<?php echo $img[0];?>">
-					</div>
-					<div class="banner_texte">
-					<?php echo get_the_content();?>
-					</div>
-				</div>
-				<div class="clear"></div>
+			
+			<?php include(locate_template('inc/disposition-intro.php'));?>
 
-
+<section>
 				<div class=" colonne">
 				<?php
 					$alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
@@ -79,16 +63,15 @@
 					?>
 				</div>
 
-			</article>
-			<!-- /article -->
+			
 
 		<?php endwhile; ?>
 		<?php endif; ?>
 
 		
 
-	</section>
-	<!-- /section -->
-
+	</section><!-- /section -->
+	
+</div><!-- /main -->
 
 <?php get_footer(); ?>

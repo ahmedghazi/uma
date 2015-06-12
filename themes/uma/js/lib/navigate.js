@@ -272,8 +272,8 @@ jQuery.navigate = {
 	active:false,
 	historyStates : new Array(),
 	defaultCache:true,
-	ajaxLinks : 'a:not(.noAjax)[rel!="external"][target!="_blank"], .ajaxLink',
-	discreteLinks : 'a:not(.noAjax)[rel!="external"][target!="_blank"], .ajaxLink',
+	ajaxLinks : 'a:not(.noAjax)[rel!="external"][target!="_blank"][data-role!="map"], .ajaxLink',
+	discreteLinks : 'a:not(.noAjax)[rel!="external"][target!="_blank"][data-role!="map"], .ajaxLink',
 	defaultInsertFunction:'defaultRefreshInsert',
 	stateChanged : function(event){ // Note: We are using statechange instead of popstate
 	   	 	var State = History.getState(false, false);
@@ -413,7 +413,7 @@ jQuery.navigate = {
 			if(href =="javascript://") return true;
 			if(!href) href = document.location.href;
 
-console.log(baseOptions)
+//console.log(baseOptions)
 			//ie add the absolute location on href attribute
 			var base = window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1);
 			href = href.replace(base, ""); 

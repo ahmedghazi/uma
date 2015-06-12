@@ -108,6 +108,9 @@ function html5blank_header_scripts()
         wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
         wp_enqueue_script('modernizr'); // Enqueue it!
 
+        wp_register_script('googlemaps', ("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"), array("jquery"), "1.10.4", false);
+        wp_enqueue_script('googlemaps');
+        
         wp_register_script('superscrollorama', get_template_directory_uri() . '/js/lib/jquery.superscrollorama.js', array('jquery'), '1.0.0', true); // Custom scripts
         wp_enqueue_script('superscrollorama'); // Enqueue it!
         wp_register_script('TweenMax', get_template_directory_uri() . '/js/lib/TweenMax.min.js', array('jquery'), '1.0.0', true); // Custom scripts
@@ -124,6 +127,9 @@ function html5blank_header_scripts()
 
         wp_register_script('IngredientsController', get_template_directory_uri() . '/js/IngredientsController.js', array('jquery'), '1.0.0', true); // Custom scripts
         wp_enqueue_script('IngredientsController'); // Enqueue it!
+
+        wp_register_script('Map', get_template_directory_uri() . '/js/Map.js', array('jquery'), '1.0.0', true); // Custom scripts
+        wp_enqueue_script('Map'); // Enqueue it!
 
 
         wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true); // Custom scripts

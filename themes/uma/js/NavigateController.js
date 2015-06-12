@@ -11,7 +11,8 @@ console.log(options)
 
         $('body,html').animate({ scrollTop: 0 }, 10);
 
-        $('section').html($("section", options.html).html()).animate({opacity:1});
+        $('.menu').html($(".menu", options.html).html());
+        $('.main').html($(".main", options.html).html()).animate({opacity:1});
 
         $(this).trigger({type:"finishrefreshinsert"});
         format();
@@ -35,12 +36,13 @@ var NavigateController = function() {
 	};
 
     this.bindEvents = function(){
-        
+        /*
         $.navigate.init({
-            //ajaxLinks:'a:not(.btn_popup)[rel!="external"][target!="_blank"], .ajaxLink',
+            ajaxLinks:'a:not(.btn_popup)[rel!="external"][target!="_blank"][data-rol!="map"], .ajaxLink',
             defaultInsertFunction:'insertPageHtml'
         });
-
+        */
+        
         $(window).on( 'hashchange', function(){
             
         });

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-
+<div class="main">
 		<!-- section -->
 		<section>
 
@@ -43,6 +43,6 @@
 		</section>
 		<!-- /section -->
 	
-
+</div><!-- /main -->
 
 <?php get_footer(); ?>

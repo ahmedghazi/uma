@@ -20,12 +20,13 @@ var ScrollController = function(){
 
 		tranche = scrollHeight/slideLen;
 
-
-		_this.bindEvents();
+		if($("body").hasClass('page-template-template-gauche-droite-centre'))
+			_this.bindEvents();
 		//_this.gotoSlide(slideIdx);
 	};
 
 	this.bindEvents = function(){
+		console.log("superscrollorama")
 		var controller = $.superscrollorama({
 			triggerAtCenter: false,
 			playoutAnimations: true
@@ -50,7 +51,9 @@ var ScrollController = function(){
 					console.log("onPin")
 					var el = this,
 						slideLen = $(el.el).find(".diapo_item").length,
-						timer = setInterval(function(){ _this.handleTimer(el,slideLen) }, 100);
+						timer = setInterval(function(){ 
+							_this.handleTimer(el,slideLen) 
+						}, 400);
 				}, 
 				onUnpin: function() {
 					console.log("onUnpin")
@@ -67,7 +70,7 @@ var ScrollController = function(){
 		var idx = Math.round( ( slideLen * ($(el.el).offset().top) ) / el.pinEnd );
 		var idxx = Math.round( ( slideLen * ($(el.el).offset().top) ) / el.pinEnd );
 		idx -= 1;
-		console.log(idx,slideLen);
+		//console.log(idx,slideLen);
 		//sc.gotoSlide(idx)
 		$(".diapo_item").addClass("vhidden");
 		$(el.el).find(".diapo_item").eq(idx).removeClass("vhidden");
