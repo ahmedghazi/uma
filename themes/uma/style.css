@@ -41,6 +41,37 @@
 	font-smoothing:antialiased;
 	text-rendering:optimizeLegibility;
 }
+
+.anime{
+	-webkit-transition: all .2s ease-in-out;
+       -moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+         -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+}
+.anime_md{
+	-webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+        -ms-transition: all .4s ease-in-out;
+         -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+}
+.anime_lg{
+	-webkit-transition: all .8s ease-in-out;
+       -moz-transition: all .8s ease-in-out;
+        -ms-transition: all .8s ease-in-out;
+         -o-transition: all .8s ease-in-out;
+            transition: all .8s ease-in-out;
+}
+
+.anime_lgg{
+	-webkit-transition: all 1s ease-in-out;
+       -moz-transition: all 1s ease-in-out;
+        -ms-transition: all 1s ease-in-out;
+         -o-transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out;
+}
+
 /* html element 62.5% font-size for REM use */
 html {
 	font-size:62.5%;
@@ -64,7 +95,7 @@ body {
 }
 img {
 	max-width:100%;
-	vertical-align:bottom;
+	vertical-align:top;
 }
 a {
 	color:#000;
@@ -112,6 +143,17 @@ input{
    color:    #000;
    opacity:  1;
 }
+
+.slideRight{
+	-webkit-transform: translateX(100%);
+	   -moz-transform: translateX(100%);
+	    -ms-transform: translateX(100%);
+	        transform: translateX(100%);
+}
+
+h1,h2,h3,h4{font-weight: 100;margin: 0;}
+
+.sep200{height: 200px;}
 /*------------------------------------*\
     STRUCTURE
 \*------------------------------------*/
@@ -119,13 +161,16 @@ input{
 /* wrapper */
 .wrapper {
 	padding: 24px;
+	padding: 0;
 }
 /* header */
 .header {
 	position: fixed;
-	top:20px;
-	width: calc(100% - 48px);
+	
+	padding: 21px;
+	width: calc(100%);
 	z-index: 1;
+	background-color: white;
 }
 /* logo */
 .logo {
@@ -139,12 +184,21 @@ input{
 
 }
 
-section{
-	position: fixed;
-	top: 0;
-	width: calc(100% - 48px);
-	height: calc(100% - 24px);
+.main{
 	padding-top: 92px;
+	position: relative;
+	width: 100%; height: 100%;
+}
+
+section{
+	/*position: fixed;
+	top: 0;*/
+	width: calc(100%);
+	height: calc(100% - 26px);
+	
+}
+footer{
+	height: 200px;
 }
 
 /* sidebar */
@@ -163,7 +217,7 @@ display: none;
     margin-left: -3px;
   	margin-top: -1px;
 }
-h1{margin: 0;}
+h1{margin: 0; height: 47px;}
 h1 a{font-size: 61px;line-height: 57px; letter-spacing: 17px}
 
 /*------------------------------------*\
@@ -171,7 +225,20 @@ h1 a{font-size: 61px;line-height: 57px; letter-spacing: 17px}
 \*------------------------------------*/
 nav{max-width: 50%;}
 nav li{float: left; width: 50%; font-size: 26px; line-height: 26px;}
-
+nav li.current_page_item a,
+nav li a:hover{
+	color: white;
+    /*text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    */
+    text-shadow: -1px 0 0 rgba(0, 0, 0, 0.8), 
+             1px 0 0 rgba(0, 0, 0, 0.8),
+             0 -1px 0 rgba(0, 0, 0, 0.8),
+             0 1px 0 rgba(0, 0, 0, 0.8);
+}
 
 /*------------------------------------*\
     PAGES
@@ -209,10 +276,124 @@ article{
 	font-size: 52px;
 	color: black;
 }
-/*------------------------------------*\
-    IMAGES
-\*------------------------------------*/
 
+/*------------------------------------*\
+    G/D/C
+\*------------------------------------*/
+.page-template-template-gauche-droite-centre section{
+	position: relative;
+	width: calc(100% - 0px);
+}
+.dispo{
+	width: 100%; height: 100%;
+	height: calc(100% - 24px);
+}
+.dispo_intro{
+	font-size: 61px;
+	text-align: center;
+	padding: 0;
+	color: white;
+
+}
+.dispo_centre{
+	text-align: center;
+	font-size: 41px;
+	width: 100%; height: 100%;
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; /* align vertical */
+}
+.dispo_droite,
+.dispo_gauche{font-size: 31px;}
+.dispo_gauche .colonne:nth-child(1){padding:24px; }
+.dispo_droite .colonne:nth-child(2){padding: 24px;}
+.bg_full{
+	width: 100%; height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/*------------------------------------*\
+    INGRÉDIENTS
+\*------------------------------------*/
+/*
+26px
+40px
+52px
+104px
+*/
+
+
+.page-template-template-ingredients section{position: relative;}
+.banner{
+	position: relative;
+	width: 100%; height: 100%;
+	
+}
+.banner_texte,
+.banner_img{
+	position: absolute;width: 100%;height: 100%; display: block;
+	background-attachment: fixed;
+}
+.banner_texte{
+	font-size: 104px;line-height: 129px;
+	font-size: 80px;line-height: 96px;
+	padding:168px 24px;
+}
+.banner_texte p{
+	margin-bottom: 131px;
+}
+.banner_img img{
+	width: 100%;
+	height: auto;
+}
+
+.page-template-template-ingredients h2{
+	font-size: 104px;line-height: 104px; cursor: pointer;
+	margin: 26px;
+}
+.page-template-template-ingredients h2:hover{
+	color: white;
+    /*text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;*/
+    text-shadow: -1px 0 0 rgba(0, 0, 0, 0.8), 
+             1px 0 0 rgba(0, 0, 0, 0.8),
+             0 -1px 0 rgba(0, 0, 0, 0.8),
+             0 1px 0 rgba(0, 0, 0, 0.8);
+}
+.page-template-template-ingredients .contenu{
+	position: relative;
+	width: calc(100% / 2);
+  	min-height: calc(100%);
+}
+.page-template-template-ingredients .content_ingredient{
+	width: 100%;
+	
+	position: absolute;
+	padding: 26px; 
+	font-size: 52px;
+}
+/*------------------------------------*\
+    DIAPO
+\*------------------------------------*/
+.diapos{
+	width: 100%; height: 100%;
+	position: relative;
+}
+.diapo_item{
+	width: 100%; height: 100%;
+	position: absolute;
+	top: 0;
+}
+.diapo_item_image{
+	width: 100%; height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
 
 
 

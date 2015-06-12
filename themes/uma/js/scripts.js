@@ -9,6 +9,8 @@ $(document).ready(function (){
 });
 
 $(window).load(function() {
+	format();
+	init_vendors();
 	reveal();
 });
 
@@ -20,8 +22,11 @@ $(window).resize(function() {
 
 **********************/
 function init(){
+
 	init_onjects();
-	init_vendors();
+	//init_vendors();
+
+	handleTemplate();
 }
 
 function init_onjects(){
@@ -30,11 +35,15 @@ function init_onjects(){
 
 	var nc = new NavigateController();
 		nc.init();
+
+	var ic = new IngredientsController();
+		ic.init();
 }
 
 function init_vendors(){
-	
+	   
 }
+
 
 /**********************
 
@@ -50,12 +59,23 @@ function reveal(){
 function format(){
 	ww = $(window).width();
 	wh = $(window).height();
+
+	$("section").css({"min-height": wh+"px"});
+	var dispo_h = wh - 92;
+	$(".dispo_centre,.dispo_gauche,.dispo_droite").css({height: dispo_h+"px"});
+
+	var bh = $(".banner").find("img").height();
+	$(".banner").css({height: bh});
+
+	var ch = $(".page-template-template-ingredients").find(".colonne").eq(0).height();
+	$(".colonne").css({"min-height": ch});
 }
 
 /**********************
 
 **********************/
-function format(){
-	ww = $(window).width();
-	wh = $(window).height();
+function handleTemplate(){
+	if($("body").hasClass("page-template-template-ingredients")){
+		$(".content_ingredient[data-idx='0']").removeClass("slideRight");
+	}
 }

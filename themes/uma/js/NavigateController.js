@@ -5,14 +5,17 @@
     $.fn.insertPageHtml = function(options) {
         //the option is an array : {html:the ajax html, scripts: the scripts that already are in the html, customData:any data you associated to this state during navigate} 
         //switch elements
+console.log(options)
+        //var bdc = $("#bdc", options.html).attr("class");
+        $("body").attr("class", options.class);
 
-        var bdc = $("#bdc", options.html).attr("class");
-        $("body").attr("class", bdc);
+        $('body,html').animate({ scrollTop: 0 }, 10);
 
         $('section').html($("section", options.html).html()).animate({opacity:1});
 
         $(this).trigger({type:"finishrefreshinsert"});
-        
+        format();
+        handleTemplate();
         sc.init();
         
         timer = setTimeout(function(){
