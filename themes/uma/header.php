@@ -22,6 +22,12 @@
         });
         </script>
 
+        <script>
+        	var ajaxUrl = "<?php bloginfo('url'); ?>/wp-admin/admin-ajax.php";
+			var baseDir = "<?php bloginfo('url'); ?>";
+			var templateDir = "<?php echo get_template_directory_uri(); ?>";
+        </script>
+
 	</head>
 	<body <?php body_class(); ?>>
 
@@ -51,8 +57,4 @@
 			</header>
 			<!-- /header -->
 
-			<div class="intro">
-				<div class="intro_visuel"></div>
-				<div class="intro_volet_gauche"></div>
-				<div class="intro_volet_droit"></div>
-			</div>
+			

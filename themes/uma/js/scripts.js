@@ -5,12 +5,16 @@ var ww,wh,sc,lamap;
 
 /* trigger when page is ready */
 $(document).ready(function (){
-	init();
+
+	
 });
 
 $(window).load(function() {
 	format();
-	init_vendors();
+	init();
+
+	$('body,html').animate({ scrollTop: 0 }, 10);
+
 	reveal();
 });
 
@@ -23,13 +27,14 @@ $(window).resize(function() {
 **********************/
 function init(){
 
-	init_onjects();
+	init_objects();
 	//init_vendors();
 
+	handleIntro();
 	handleTemplate();
 }
 
-function init_onjects(){
+function init_objects(){
 	sc = new ScrollController();
 	sc.init();
 
@@ -83,6 +88,28 @@ function format(){
 /**********************
 
 **********************/
+function handleIntro(){
+	if(getCookie("visited4") == ""){
+		setCookie("visited4",true);
+		console.log("new")
+		$("#intro").show();
+		var d = 2000
+		setTimeout(function(){
+			$("#intro_volet_gauche").addClass("slideLeft");
+			$("#intro_volet_droit").addClass("slideRight");
+		},d);
+		setTimeout(function(){
+			//$("#intro").fadeOut('slow');
+		},d*2);
+	}else{
+		console.log("old")
+		$("#intro").hide();
+	}
+}
+
+/**********************
+
+**********************/
 function handleTemplate(){
 	if($("body").hasClass("page-template-template-ingredients")){
 		$(".content_ingredient[data-idx='0']").removeClass("slideRight");
@@ -100,5 +127,32 @@ function handleTemplate(){
 			$(".form").addClass("hidden");
 			$("#map").removeClass("hidden");
 		});
+
+		$("html").on("change", "#caisses", function(e){
+			var val = $(this).val();
+			var total = parseFloat(val)*25;
+				total += "€";
+			$("#total").val(total);
+		});
+
+		$("html").on("submit", "form", function(e){
+			e.preventDefault();
+			var data = $(this).serialize();
+			var o = {
+				action:"order_caisse",
+				data:data
+			}
+			console.log(data)
+	        $.ajax({
+				url: ajaxUrl,
+				type:'POST',
+				data: o,
+				success: function(res){
+					console.log(res)
+				}
+			});
+		});
 	}
+
+
 }

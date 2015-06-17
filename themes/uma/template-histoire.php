@@ -1,6 +1,5 @@
-<?php /* Template Name: GAUCHE DROITE CENTRE */ get_header(); ?>
+<?php /* Template Name: HISTOIRE */ get_header(); ?>
 
-	
 <div class="main">
 		
 
@@ -26,17 +25,18 @@
 			
 					$disposition = geT_field("disposition");
 					switch($disposition){
+						
 						case "intro":
-						include(locate_template('inc/disposition-intro.php'));
+						include(locate_template('inc/histoire-disposition-intro.php'));
 						break;
 						case "centre":
-						include(locate_template('inc/disposition-centre.php'));
+						include(locate_template('inc/histoire-disposition-centre.php'));
 						break;
 						case "gauche":
-						include(locate_template('inc/disposition-gauche.php'));
+						//include(locate_template('inc/histoire-disposition-gauche.php'));
 						break;
 						case "droite":
-						include(locate_template('inc/disposition-droite.php'));
+						include(locate_template('inc/histoire-disposition-droite.php'));
 						break;
 					}
 					
@@ -52,11 +52,10 @@
 	<?php endwhile; ?>
 	<?php endif; ?>
 
-
+	
 
 	
-</div><!-- /main -->
-
+	</div><!-- /main -->
 <div class="sep200"></div>
 
 <?php get_footer(); ?>

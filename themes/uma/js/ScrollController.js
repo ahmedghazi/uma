@@ -26,54 +26,69 @@ var ScrollController = function(){
 	};
 
 	this.bindEvents = function(){
-		console.log("superscrollorama")
+		
 		var controller = $.superscrollorama({
 			triggerAtCenter: false,
 			playoutAnimations: true
 		});
 	    
-	   
-
+	    /*
 		var pinAnimations = new TimelineLite();
 			pinAnimations
-				.append(TweenMax.from( $('.colonne_desc'), 2, 
-			  		{css:{top:'90px', opacity: 1}, ease:Expo.easeOut}))
+				.append(TweenMax.to( $('.diapos'), 4, 
+			  		{css:{opacity: 1, top:'0%'}, ease:Expo.easeOut}))
+		*/
 			 
-
-		var timer;
+$('.main').imagesLoaded( function() {
+	$(".colonne").css({height: $(".colonne").css("min-height")})
+		//var timer;
 		$("section.pin").each(function(index, el) {
-			var d = $(el).find(".diapo_item").length * 1000;
-			$dispo = $(el).children(".dispo")
+
+			var d = $(el).find(".diapo_item").length * wh;
+			//d = $(".colonne").height();
+			d = 3000;
+			
+			$dispo = $(el).children(".dispo");
 			controller.pin($dispo, d, {
-				anim:pinAnimations, 
+				//anim:pinAnimations, 
+				anim: (new TimelineLite())
+			  		.append(TweenMax.to( $dispo.find(".diapos"), 4,{css:{top:'-50%'},ease:Expo.easeOut})),
+			  		
+				
 				offset:-108,
 				onPin: function() {
 					console.log("onPin")
+					//$(".diapos").css({opacity: 0, top:'50%'})
+/*
 					var el = this,
-						slideLen = $(el.el).find(".diapo_item").length,
-						timer = setInterval(function(){ 
-							_this.handleTimer(el,slideLen) 
-						}, 400);
+					slideLen = $(el.el).find(".diapo_item").length,
+					timer = setInterval(function(){ 
+						_this.handleTimer(el,slideLen) 
+					}, 400);
+*/
 				}, 
 				onUnpin: function() {
 					console.log("onUnpin")
-					clearInterval(timer);
+				//	clearInterval(timer);
 				}
 			}); 
 		
 		});
+});
+
 	};
 
 	this.handleTimer = function(el,slideLen){
-		
-		//console.log(el.pinStart,$(el.el).offset().top,el.pinEnd)
-		var idx = Math.round( ( slideLen * ($(el.el).offset().top) ) / el.pinEnd );
-		var idxx = Math.round( ( slideLen * ($(el.el).offset().top) ) / el.pinEnd );
-		idx -= 1;
-		//console.log(idx,slideLen);
-		//sc.gotoSlide(idx)
-		$(".diapo_item").addClass("vhidden");
-		$(el.el).find(".diapo_item").eq(idx).removeClass("vhidden");
+		if($(el.el).position().top == 108){
+			console.log($(el.el).offset().top , el.pinEnd)
+			var idx = Math.round( ( slideLen * $(el.el).offset().top ) / el.pinEnd );
+			//var idxx = Math.round( ( slideLen * $(el.el).offset().top ) / el.pinEnd );
+			//idx -= 1;
+			console.log(idx,slideLen);
+			//sc.gotoSlide(idx)
+			$(".diapo_item").addClass("vhidden");
+			$(el.el).find(".diapo_item").eq(idx).removeClass("vhidden");
+		}
 	}
 
 	this.gotoSlide = function(idx){

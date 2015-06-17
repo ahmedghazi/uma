@@ -6,6 +6,12 @@
 			</footer>
 			<!-- /footer -->
 
+			<div id="intro">
+				<div id="intro_visuel"></div>
+				<div id="intro_volet_gauche" class="anime_lgg"></div>
+				<div id="intro_volet_droit"  class="anime_lgg"></div>
+			</div>
+
 		</div>
 		<!-- /wrapper -->
 

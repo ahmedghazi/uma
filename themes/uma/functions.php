@@ -110,6 +110,9 @@ function html5blank_header_scripts()
 
         wp_register_script('googlemaps', ("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"), array("jquery"), "1.10.4", false);
         wp_enqueue_script('googlemaps');
+
+        wp_register_script('imagesloaded', get_template_directory_uri() . '/js/lib/imagesloaded.pkgd.min.js', array(), '2.7.1');
+        wp_enqueue_script('imagesloaded');
         
         wp_register_script('superscrollorama', get_template_directory_uri() . '/js/lib/jquery.superscrollorama.js', array('jquery'), '1.0.0', true); // Custom scripts
         wp_enqueue_script('superscrollorama'); // Enqueue it!
@@ -131,6 +134,8 @@ function html5blank_header_scripts()
         wp_register_script('Map', get_template_directory_uri() . '/js/Map.js', array('jquery'), '1.0.0', true); // Custom scripts
         wp_enqueue_script('Map'); // Enqueue it!
 
+        wp_register_script('umaPlugins', get_template_directory_uri() . '/js/plugins.js', array('jquery'), '1.0.0', true); // Custom scripts
+        wp_enqueue_script('umaPlugins'); // Enqueue it!
 
         wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true); // Custom scripts
         wp_enqueue_script('html5blankscripts'); // Enqueue it!
@@ -461,5 +466,29 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
 {
     return '<h2>' . $content . '</h2>';
 }
+
+
+
+add_action( 'wp_ajax_order_caisse', 'handle_order_caisse' );
+add_action( 'wp_ajax_nopriv_order_caisse', 'handle_order_caisse' );
+
+function handle_order_caisse() {
+    $data = $_REQUEST['data'];
+    parse_str($data);
+//echo "email ".get_option("admin_email");
+    $To = get_option("admin_email");
+    $Objet = "Commande UMÀ";
+    $Body = "Nom: ".$nom."\n";
+    $Body = "Prénom: ".$prenom."\n";
+    $Body = "Caisses: ".$caisses."\n";
+    $Body = "Adresse: ".$adresse."\n";
+    $Body = "Total: ".$total."\n";
+
+    add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
+    $res = wp_mail($To, $Objet, $Body);
+    echo $res;
+    exit();
+}
+
 
 ?>

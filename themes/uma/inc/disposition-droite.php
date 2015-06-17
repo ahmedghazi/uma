@@ -10,8 +10,10 @@
 			$html = '<div class="diapos">';
 			foreach($gallery_items as $item){
 			    $css = 'style="background-image:url('.$item["image_url"].')"';
-			    $html .= '<div class="diapo_item vhidden">';
-				    $html .= '<div class="diapo_item_image" '.$css.'></div>';		    
+			    $html .= '<div class="diapo_item vvhidden">';
+				    $html .= '<div class="diapo_item_image" >';		  
+				    	$html .= '<img src="'.$item["image_url"].'" width="" height="">';  
+			    	$html .= '</div>';
 			    $html .= '</div>';
 			}
 			$html .= '</div>';

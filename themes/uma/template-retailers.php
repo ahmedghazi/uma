@@ -14,9 +14,10 @@
 						<form action="">
 							<p><input type="text" name="nom" placeholder="Nom:"></p>
 							<p><input type="text" name="prenom" placeholder="Prénom:"></p>
-							<p><input type="number" name="caisses" placeholder="Nombre de caisse*:"></p>
-							<p><textarea name="addresse" placeholder="Addresse:" id="" cols="" rows=""></textarea></p>
-							<p><input type="number" name="total" placeholder="Total:"></p>
+							<p><input type="number" id="caisses" name="caisses"  placeholder="Nombre de caisse*:"></p>
+							<p><textarea name="adresse" placeholder="Addresse:" id="" cols="" rows=""></textarea></p>
+							<p><input type="text" id="total" name="total" disabled="disabled" placeholder="Total:"></p>
+							<p><input type="submit" value="Commander"></p>
 						</form>
 
 						<div class="align_bottom">
