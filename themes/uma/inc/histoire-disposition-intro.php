@@ -1,4 +1,4 @@
-<section class="parallax">
+<section class="">
 	<div class="dispo histoire_dispo_intro">
 		<?php echo get_the_content();?>
 		<?php

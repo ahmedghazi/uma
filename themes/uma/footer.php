@@ -1,16 +1,42 @@
 			<!-- footer -->
 			<footer >
+				<div class="footer_col">
+					<div class="copy">
+						All images &copy;<?php echo date("Y"); ?> <?php echo bloginfo("name"); ?>
+					</div>
+				</div><!--
+				--><div class="footer_col aligncenter">
+					<ul class="social">
+						<li><a target="_blank" href="https://www.facebook.com/drinkuma"><i class="fa fa-facebook"></i></a></li>
+						<li><a target="_blank" href="https://twitter.com/uma_paris_"><i class="fa fa-twitter"></i></a></li>
+						<li><a target="_blank" href="https://instagram.com/uma.paris"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div><!--
+				--><div class="footer_col ">
+					<nav class=" alignright" role="">
+					<?php 
+						$args = array(
+						  'menu'       	  => 'Menu Footer', 
+						  'theme_location'  => 'primary',
+						  'container'       => 'div', 
+						  //'container_id'    => 'menu',
+						  'echo'            => true,
+						  //'fallback_cb'     => 'wp_page_menu',
+						  //'link_before' 	=> '',
+						  //'link_after' 		=> '<span class="sep-menu">•</span>',
+						  'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						  'depth'           => 1,
+						  'walker'          => '');
 
-				
+						wp_nav_menu($args);	
+					?>
+					</nav>
+				</div>
 
 			</footer>
 			<!-- /footer -->
 
-			<div id="intro">
-				<div id="intro_visuel"></div>
-				<div id="intro_volet_gauche" class="anime_lgg"></div>
-				<div id="intro_volet_droit"  class="anime_lgg"></div>
-			</div>
+			
 
 		</div>
 		<!-- /wrapper -->

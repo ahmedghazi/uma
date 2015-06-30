@@ -14,10 +14,15 @@
 						<form action="">
 							<p><input type="text" name="nom" placeholder="Nom:"></p>
 							<p><input type="text" name="prenom" placeholder="Prénom:"></p>
+							<p><input type="email" name="email" placeholder="Email:"></p>
 							<p><input type="number" id="caisses" name="caisses"  placeholder="Nombre de caisse*:"></p>
 							<p><textarea name="adresse" placeholder="Addresse:" id="" cols="" rows=""></textarea></p>
 							<p><input type="text" id="total" name="total" disabled="disabled" placeholder="Total:"></p>
 							<p><input type="submit" value="Commander"></p>
+							<p class="msg ">
+								<span class="hidden success">Banco</span>
+								<span class="hidden error">Oups !</span>
+							</p>
 						</form>
 
 						<div class="align_bottom">
@@ -49,7 +54,7 @@
 	$href = get_permalink(geT_the_ID());
 	$lat = get_field("lat");
 	$lng = get_field("lng");
-	$cl = $c == 0 ? "commander" : "retailer";
+	$cl = $c == 0 ? "commander current_retailer" : "retailer";
 
 	echo "<li class='".$cl."' data-lat='".$lat."' data-lng='".$lng."'>".get_the_title().'</li>';
 	$c++;

@@ -22,59 +22,72 @@ var ScrollController = function(){
 
 		if($("body").hasClass('page-template-template-gauche-droite-centre'))
 			_this.bindEvents();
+
+		if($("body").hasClass('page-template-template-histoire'))
+			_this.bindEvents();
 		//_this.gotoSlide(slideIdx);
 	};
 
 	this.bindEvents = function(){
-		
+		$(window).scroll(function(event) {
+			var pt = $(window).scrollTop();
+			console.log(pt)
+			if(pt < 91)
+				$(".fa-chevron-down").hide();
+			else
+				$(".fa-chevron-down").show();
+		});
+
 		var controller = $.superscrollorama({
 			triggerAtCenter: false,
 			playoutAnimations: true
 		});
-	    
-	    /*
-		var pinAnimations = new TimelineLite();
-			pinAnimations
-				.append(TweenMax.to( $('.diapos'), 4, 
-			  		{css:{opacity: 1, top:'0%'}, ease:Expo.easeOut}))
-		*/
 			 
-$('.main').imagesLoaded( function() {
-	$(".colonne").css({height: $(".colonne").css("min-height")})
-		//var timer;
-		$("section.pin").each(function(index, el) {
+		$('.main').imagesLoaded( function() {
+				//var timer;
+			$("section.pin").each(function(index, el) {
 
-			var d = $(el).find(".diapo_item").length * wh;
-			//d = $(".colonne").height();
-			d = 3000;
-			
-			$dispo = $(el).children(".dispo");
-			controller.pin($dispo, d, {
-				//anim:pinAnimations, 
-				anim: (new TimelineLite())
-			  		.append(TweenMax.to( $dispo.find(".diapos"), 4,{css:{top:'-50%'},ease:Expo.easeOut})),
-			  		
+				var d = $(el).find(".diapo_item").length * wh;
+	//			d = 3000;
 				
-				offset:-108,
-				onPin: function() {
-					console.log("onPin")
-					//$(".diapos").css({opacity: 0, top:'50%'})
-/*
-					var el = this,
-					slideLen = $(el.el).find(".diapo_item").length,
-					timer = setInterval(function(){ 
-						_this.handleTimer(el,slideLen) 
-					}, 400);
-*/
-				}, 
-				onUnpin: function() {
-					console.log("onUnpin")
-				//	clearInterval(timer);
-				}
-			}); 
-		
+				$dispo = $(el).children(".dispo");
+				controller.pin($dispo, d, {
+					anim: (new TimelineLite())
+				  		.append(TweenMax.to( $dispo.find(".diapos"), 4,{css:{top:'-100%'}})),
+					offset:-108,
+					onPin: function() {
+						console.log("onPin")
+					}, 
+					onUnpin: function() {
+						console.log("onUnpin")
+					}
+				}); 
+			
+			});
+
+			$("section.pin2").each(function(index, el) {
+
+				var d = $(el).find(".colonne_desc").height() - 108;
+				console.log(d);
+				//d = 2000;
+				
+				$dispo = $(el).find(".colonne_pin");
+				
+				controller.pin($dispo, d, {
+
+					offset:-108,
+					onPin: function() {
+						console.log("onPin")
+					}, 
+					onUnpin: function() {
+						console.log("onUnpin")
+					//	clearInterval(timer);
+					}
+				}); 
+			
+			});
+
 		});
-});
 
 	};
 

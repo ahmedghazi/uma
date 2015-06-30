@@ -7,7 +7,7 @@
 			<?php include(locate_template('inc/disposition-intro.php'));?>
 
 <section>
-				<div class=" colonne">
+				<div class=" colonne colonne_titre">
 				<?php
 					$alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 					$args = array(
@@ -51,6 +51,7 @@
 					foreach ($arr_content as $content) {
 						$bg_color = $content["color"];
 						if($bg_color == "")$bg_color = "#FFFFFF";
+						//$bg_color = "#FFFFFF";
 						$css = "style='background-color:".$bg_color."'";
 						?>
 						<div class="content_ingredient slideRight anime_md" <?php echo $css ;?> data-idx="<?php echo $c?>">

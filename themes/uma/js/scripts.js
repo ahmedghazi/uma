@@ -30,7 +30,7 @@ function init(){
 	init_objects();
 	//init_vendors();
 
-	handleIntro();
+	if($("body").hasClass("home"))handleIntro();
 	handleTemplate();
 }
 
@@ -81,30 +81,48 @@ function format(){
 	var bh = $(".banner").find("img").height();
 	$(".banner").css({height: bh});
 
-	var ch = $(".page-template-template-ingredients").find(".colonne").eq(0).height() || $("section").height();
-	$(".colonne").css({"min-height": ch});
+	if($("body").hasClass("page-template-template-ingredients")){
+		var maxHeight = -1;
+
+		$('.content_ingredient').each(function() {
+			maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
+		});
+
+		$('.colonne').each(function() {
+			$(this).height(maxHeight);
+		});
+	}
+
+	if($("body").hasClass("page-template-template-retailers")){
+		$(".colonne").css({"min-height": dispo_h});
+	}
+
+
+
+	$(".hdd").css({height:$(".hdd").find("img").height()})
+	if($("body").hasClass("page-template-template-histoire")){
+		console.log($(".histoire_banner_img").find("img").height());
+		$(".colonne").css({"height": $(".histoire_banner_img").find("img").height()});
+	}
+
+
 }
 
 /**********************
 
 **********************/
 function handleIntro(){
-	if(getCookie("visited4") == ""){
-		setCookie("visited4",true);
-		console.log("new")
-		$("#intro").show();
-		var d = 2000
-		setTimeout(function(){
-			$("#intro_volet_gauche").addClass("slideLeft");
-			$("#intro_volet_droit").addClass("slideRight");
-		},d);
-		setTimeout(function(){
-			//$("#intro").fadeOut('slow');
-		},d*2);
-	}else{
-		console.log("old")
-		$("#intro").hide();
-	}
+	//$("#intro").hide();
+	//return;
+	$("#intro").show();
+	var d = 4000;
+	setTimeout(function(){
+		$("#intro_volet_gauche").addClass("slideLeft");
+		$("#intro_volet_droit").addClass("slideRight");
+	},d);
+	setTimeout(function(){
+		$("header").hide().css({"z-index":2}).fadeIn();
+	},d*1.5);
 }
 
 /**********************
@@ -121,11 +139,17 @@ function handleTemplate(){
 		$("html").on("click", ".commander", function(){
 			$("#map").addClass("hidden");
 			$(".form").removeClass("hidden");
+
+			$(".retailers li").removeClass("current_retailer");
+			$(this).addClass("current_retailer");
 		});
 
 		$("html").on("click", ".retailer", function(){
 			$(".form").addClass("hidden");
 			$("#map").removeClass("hidden");
+
+			$(".retailers li").removeClass("current_retailer");
+			$(this).addClass("current_retailer");
 		});
 
 		$("html").on("change", "#caisses", function(e){
@@ -136,6 +160,7 @@ function handleTemplate(){
 		});
 
 		$("html").on("submit", "form", function(e){
+			$("input[type='submit']").hide();
 			e.preventDefault();
 			var data = $(this).serialize();
 			var o = {
@@ -149,6 +174,7 @@ function handleTemplate(){
 				data: o,
 				success: function(res){
 					console.log(res)
+					$(".success").removeClass("hidden");
 				}
 			});
 		});

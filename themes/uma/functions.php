@@ -66,6 +66,7 @@ if (function_exists('add_theme_support'))
 function html5blank_nav()
 {
     //'post__not_in' => array( 48 ),
+    $exclude = "{81},{117}";
     wp_nav_menu(
     array(
         'theme_location'  => 'primary',
@@ -84,7 +85,7 @@ function html5blank_nav()
         'items_wrap'      => '<ul>%3$s</ul>',
         'depth'           => 1,
         'walker'          => '',
-        'exclude'         => 81
+        'exclude'         => $exclude
         )
     );
 }
@@ -490,5 +491,61 @@ function handle_order_caisse() {
     exit();
 }
 
+function trace($o){
+    echo "<pre>";
+        print_r($o);
+    echo "</pre>";
+}
 
+
+function get_meta_og(){
+    $meta = '<!-- Google Authorship and Publisher Markup -->'."\n";
+    //$meta .= '<link rel="author" href=" https://plus.google.com/+TaraexpeditionsOrg/posts"/>'."\n";
+    //$meta .= '<link rel="publisher" href=” https://plus.google.com/+TaraexpeditionsOrg"/>'."\n";
+    $meta .= '<!-- End Google Authorship and Publisher Markup -->'."\n";
+
+    $meta .= '<!-- Open Graph data --> '."\n";
+    if (is_home() || is_front_page()){
+        
+        $type = 'website';
+        $title = get_bloginfo("name");
+        $description = get_bloginfo("description");
+        $url = get_bloginfo("url");
+        $img = get_template_directory_uri().'/img/uma-logo.jpeg';
+    }else{
+        
+        wp_reset_query();
+
+        $type = 'article';
+        $title = get_the_title();
+        $description = get_the_excerpt();
+        $url = get_permalink(get_the_ID());
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail');
+        $img = $img[0];
+    }
+    $img = get_template_directory_uri().'/img/uma-logo.jpeg';
+
+    //$meta .= '<meta property="fb:page_id" content="101559219152" />'."\n";
+    $meta .= '<meta property="og:type" content="'.$type.'">'."\n";
+    //$meta .= '<meta property="fb:app_id" content="739392442788000" />'."\n";
+    $meta .= '<meta property="og:title" content="'.$title.'">'."\n";
+    $meta .= '<meta property="og:description" content="'.$description.'">'."\n";
+    $meta .= '<meta property="og:site_name" content="'.get_bloginfo("name").'">'."\n";
+    $meta .= '<meta property="og:url" content="'.$url.'">'."\n";
+    $meta .= '<meta property="og:determiner" content="auto">'."\n";
+    $meta .= '<meta property="og:locale" content="fr_FR">'."\n";
+    $meta .= '<meta property="og:image" content="'.$img.'" />'."\n";
+    
+    $meta .= '<!-- End Open Graph data --> '."\n";
+
+    $meta .= '<!-- Twitter Card data -->'."\n";
+    $meta .= '<meta name="twitter:card" content="summary_large_image">'."\n";
+    $meta .= '<meta name="twitter:site" content="@umaparis">'."\n";
+    $meta .= '<meta name="twitter:title" content="'.$title.'">'."\n";
+    $meta .= '<meta name="twitter:description" content="'.$description.'">'."\n";
+    $meta .= '<meta name="twitter:creator" content="@umaparis">'."\n";
+    $meta .= '<!-- Twitter summary card with large image must be at least 280x150px -->'."\n";
+    $meta .= '<meta name="twitter:image:src" content="'.$img.'">'."\n";
+    echo $meta;
+}
 ?>

@@ -56,6 +56,6 @@
 
 	
 	</div><!-- /main -->
-<div class="sep200"></div>
+
 
 <?php get_footer(); ?>

@@ -10,8 +10,9 @@
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="<?php bloginfo('description'); ?>">
-
+		<!--meta name="description" content="<?php bloginfo('description'); ?>"-->
+		
+		<?php //get_meta_og();?>
 		<?php wp_head(); ?>
 		<script>
         // conditionizr.com
@@ -50,7 +51,23 @@
 
 					<!-- nav -->
 					<nav class="nav floatright" role="navigation">
-						<?php html5blank_nav(); ?>
+						<?php //html5blank_nav(); ?>
+						<?php 
+							$args = array(
+							  'menu'       	  => 'Menu Header', 
+							  'theme_location'  => 'primary',
+							  'container'       => 'div', 
+							  //'container_id'    => 'menu',
+							  'echo'            => true,
+							  //'fallback_cb'     => 'wp_page_menu',
+							  //'link_before' 	=> '',
+							  //'link_after' 		=> '<span class="sep-menu">•</span>',
+							  'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+							  'depth'           => 1,
+							  'walker'          => '');
+
+							wp_nav_menu($args);	
+						?>
 					</nav>
 					<!-- /nav -->
 
